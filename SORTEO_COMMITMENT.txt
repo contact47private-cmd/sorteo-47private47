@@ -1,0 +1,29 @@
+47PRIVATE — DROP 001 — COMPROMISO TÉCNICO DEL SORTEO
+
+Fecha: 17/08/2026
+Desbloqueo: 17:35:00 CEST (Europe/Madrid)
+Identificador: 47PRIVATE-DROP001-2026
+
+LISTA OFICIAL CONGELADA
+Archivo: participaciones_validas.csv
+Papeletas: 307
+SHA-256: 7cfe7c6dfb73c79e9fab1ded2e9cf33e53a48cd1290741baa7c47766f1a5cc2b
+
+REGLA DE INICIO
+- Antes de las 17:35 el backend rechaza cualquier intento.
+- A partir de las 17:35 se requiere DRAW_ADMIN_TOKEN, almacenado únicamente como variable de entorno de Vercel.
+- El token no forma parte del HTML ni del repositorio.
+
+AZAR
+- La semilla de 256 bits se genera únicamente después del clic autorizado mediante crypto.randomBytes(32) en el servidor de Vercel.
+- El resultado se deriva de esa semilla y de la lista oficial mediante SHA-256 con rechazo para evitar sesgo modular.
+- Ganador y dos suplentes son personas distintas.
+
+UN SOLO RESULTADO GLOBAL
+- El backend persiste el resultado en Redis con SET ... NX.
+- NX solo permite crear la clave si todavía no existe.
+- Después del primer resultado oficial, cualquier petición posterior devuelve siempre el resultado ya almacenado.
+- No existe endpoint de reset ni borrado desde la web.
+
+VERIFICACIÓN
+Tras el sorteo se muestran: fecha/hora, papeletas seleccionadas, SHA-256 de la lista y semilla criptográfica.

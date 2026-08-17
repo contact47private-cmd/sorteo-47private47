@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SORTEO 47PRIVATE — DROP 001 · TrueLove</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050505;--panel:#0a0a0a;--panel2:#0e0e0f;--red:#d61a2a;--red2:#c1121f;--fg:#f4f4f0;--dim:#8a8a8a;--dim2:#5c5c5e;--line:#1c1c1e}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:'Oswald','Arial Narrow',Arial,sans-serif;letter-spacing:.02em;overflow-x:hidden}
+.anton{font-family:'Anton','Arial Black',Impact,sans-serif}
+/* topbar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:rgba(5,5,5,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-family:'Anton';font-size:22px;letter-spacing:.06em}
+.logo span{color:var(--red)}
+.topbar nav{display:flex;gap:22px}
+.topbar a{color:var(--dim);text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:.22em;transition:color .2s}
+.topbar a:hover{color:var(--fg)}
+/* hero */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 60px;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 30%,rgba(214,26,42,.14),transparent 65%)}
+.kicker{font-size:12px;letter-spacing:.5em;color:var(--dim);text-transform:uppercase;animation:fadeUp .8s .1s both}
+.hero h1{font-family:'Anton';font-size:clamp(64px,13vw,170px);line-height:.92;text-transform:uppercase;margin:18px 0 10px;animation:fadeUp .8s .25s both}
+.hero h1 .bar{display:inline-block;background:var(--red);color:var(--red);border-radius:2px;transform:translateY(6px);animation:pulseBar 2.4s ease-in-out infinite}
+.hero .sub{font-size:clamp(15px,2.4vw,21px);color:var(--dim);max-width:640px;font-weight:300;animation:fadeUp .8s .4s both}
+.hero .sub b{color:var(--fg);font-weight:600}
+.stats{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:44px;animation:fadeUp .8s .55s both}
+.stat{border:1px solid var(--line);background:var(--panel);padding:16px 22px;min-width:150px}
+.stat .n{font-family:'Anton';font-size:34px;color:var(--fg)}
+.stat .n.red{color:var(--red)}
+.stat .l{font-size:11px;letter-spacing:.25em;color:var(--dim);text-transform:uppercase;margin-top:4px}
+.scrolldown{margin-top:56px;color:var(--dim2);font-size:11px;letter-spacing:.4em;text-transform:uppercase;animation:fadeUp .8s .7s both}
+.scrolldown::after{content:"";display:block;width:1px;height:44px;background:linear-gradient(var(--red),transparent);margin:12px auto 0;animation:drop 1.6s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes pulseBar{0%,100%{opacity:1}50%{opacity:.55}}
+/* sections */
+section{max-width:1060px;margin:0 auto;padding:90px 22px}
+.sec-k{font-size:11px;letter-spacing:.45em;color:var(--red);text-transform:uppercase}
+.sec-t{font-family:'Anton';font-size:clamp(34px,6vw,58px);text-transform:uppercase;margin:10px 0 26px}
+/* draw machine */
+#sorteo{max-width:100%;padding:90px 0}
+.machine-wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.machine{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#080809);position:relative;overflow:hidden}
+.machine::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--red)}
+.mach-inner{padding:56px 28px;text-align:center}
+.mach-label{font-size:12px;letter-spacing:.5em;color:var(--dim);text-transform:uppercase}
+.display{margin:26px auto 8px;height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.display .name{font-family:'Anton';font-size:clamp(38px,7vw,84px);text-transform:lowercase;letter-spacing:.01em;white-space:nowrap}
+.display .name.censored{color:transparent;background:var(--fg);border-radius:4px;padding:0 18px}
+.display .name.rolling{filter:blur(1.5px)}
+.display .name.win{color:var(--red);animation:winPop .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes winPop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.papeleta-tag{font-size:13px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase;height:20px}
+.papeleta-tag b{color:var(--fg)}
+#btnDraw{margin-top:34px;font-family:'Anton';font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);background:var(--red2);border:none;padding:20px 66px;cursor:pointer;position:relative;transition:transform .15s, box-shadow .3s;box-shadow:0 0 0 rgba(214,26,42,.5);animation:glow 2.2s ease-in-out infinite}
+#btnDraw:hover{transform:translateY(-2px)}
+#btnDraw:disabled{opacity:.35;cursor:not-allowed;animation:none}
+@keyframes glow{0%,100%{box-shadow:0 0 26px rgba(214,26,42,.28)}50%{box-shadow:0 0 52px rgba(214,26,42,.6)}}
+.mach-note{margin-top:16px;font-size:12px;color:var(--dim2);letter-spacing:.08em}
+/* results */
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:26px}
+.rcard{border:1px solid var(--line);background:var(--panel);padding:26px 22px;opacity:.35;transform:translateY(10px);transition:all .5s}
+.rcard.filled{opacity:1;transform:none;border-color:rgba(214,26,42,.55)}
+.rcard.winner.filled{background:linear-gradient(180deg,#140507,#0a0a0a);box-shadow:0 0 40px rgba(214,26,42,.18) inset}
+.rcard .tag{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--dim)}
+.rcard.winner .tag{color:var(--red)}
+.rcard .u{font-family:'Anton';font-size:30px;margin:10px 0 4px;word-break:break-all}
+.rcard .p{font-size:12px;color:var(--dim);letter-spacing:.1em}
+.rcard .m{font-size:12px;color:var(--dim2);margin-top:8px;word-break:break-all}
+.verify{margin-top:22px;border:1px dashed rgba(214,26,42,.4);padding:16px 18px;font-size:13px;color:var(--dim);display:none}
+.verify b{color:var(--fg)}
+.verify.show{display:block;animation:fadeUp .5s both}
+/* tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line);margin-bottom:26px}
+.tab{background:none;border:none;color:var(--dim);font-family:'Oswald';font-size:13px;letter-spacing:.22em;text-transform:uppercase;padding:14px 18px;cursor:pointer;border-bottom:2px solid transparent;transition:.2s}
+.tab.active{color:var(--fg);border-bottom-color:var(--red)}
+.tabpane{display:none}
+.tabpane.active{display:block;animation:fadeUp .4s both}
+.search{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);color:var(--fg);font-family:'Oswald';font-size:14px;padding:12px 16px;margin-bottom:16px;letter-spacing:.05em}
+.search::placeholder{color:var(--dim2)}
+.tablewrap{max-height:520px;overflow:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{position:sticky;top:0;background:var(--panel2);color:var(--dim);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:10.5px;padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+td{padding:10px 14px;border-bottom:1px solid #121214;color:#cfcfcb;font-weight:300}
+td.n{color:var(--red);font-weight:500;width:70px}
+td.user{font-weight:500;color:var(--fg)}
+tr:hover td{background:#0d0d0e}
+.prose{color:#c9c9c4;font-weight:300;line-height:1.75;font-size:15.5px;max-width:820px}
+.prose h3{font-family:'Anton';font-size:22px;text-transform:uppercase;letter-spacing:.04em;margin:30px 0 10px;color:var(--fg)}
+.prose h3 span{color:var(--red)}
+.prose b{color:var(--fg);font-weight:600}
+.prose .hl{background:rgba(214,26,42,.12);border-left:3px solid var(--red);padding:14px 18px;margin:16px 0}
+.prose ol{margin:10px 0 10px 20px}
+.prose li{margin:6px 0}
+footer{border-top:1px solid var(--line);padding:44px 22px;text-align:center;color:var(--dim2);font-size:11px;letter-spacing:.35em;text-transform:uppercase}
+footer .heart{color:var(--red)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:80}
+
+/* admin authorization modal */
+.admin-overlay{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:22px}
+.admin-overlay.show{display:flex}
+.admin-box{width:min(480px,100%);border:1px solid #2a2a2d;background:#09090a;padding:30px;box-shadow:0 20px 80px rgba(0,0,0,.55)}
+.admin-box h3{font-family:'Anton';font-size:28px;text-transform:uppercase;margin-bottom:8px}
+.admin-box p{font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:18px}
+.admin-box input{width:100%;background:#050505;border:1px solid #29292c;color:var(--fg);font-family:'Oswald';font-size:18px;padding:14px 15px;outline:none}
+.admin-box input:focus{border-color:var(--red)}
+.admin-actions{display:flex;gap:10px;margin-top:14px}
+.admin-actions button{flex:1;border:1px solid var(--line);padding:13px 12px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.admin-confirm{background:var(--red2);color:white;border-color:var(--red2)!important}
+.admin-cancel{background:#0d0d0e;color:var(--dim)}
+.admin-error{min-height:20px;color:#ff7b86;font-size:12px;margin-top:10px}
+
+@media(max-width:640px){.topbar nav{display:none}}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="admin-overlay" id="adminOverlay" aria-hidden="true">
+  <div class="admin-box">
+    <h3>Autorización privada</h3>
+    <p>El resultado oficial solo puede crearse una vez. Introduce el código privado configurado en Vercel. El código no está incluido en esta web ni en GitHub.</p>
+    <input id="adminToken" type="password" autocomplete="off" placeholder="Código privado" onkeydown="if(event.key==='Enter') confirmOfficialDraw()">
+    <div class="admin-error" id="adminError"></div>
+    <div class="admin-actions">
+      <button class="admin-cancel" onclick="closeAdminModal()">Cancelar</button>
+      <button class="admin-confirm" id="adminConfirm" onclick="confirmOfficialDraw()">Confirmar sorteo</button>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div class="logo">47<span>PRIVATE</span></div>
+  <nav>
+    <a href="#sorteo">Sorteo</a><a href="#datos">Papeletas</a><a href="#metodo">Metodología</a><a href="#bases">Bases</a>
+  </nav>
+</div>
+
+<div class="hero">
+  <div class="kicker">Revelation 2026 · Drop 001 · TrueLove</div>
+  <h1>SORTE<span class="bar">O.</span></h1>
+  <div class="sub">Sorteo oficial verificable de <b>47PRIVATE</b>. Cada comentario válido es una papeleta: <b>a más comentarios, más posibilidades</b>. Todo el proceso, los datos y las reglas están publicados en esta página.</div>
+  <div class="stats">
+    <div class="stat"><div class="n">351</div><div class="l">Comentarios</div></div>
+    <div class="stat"><div class="n red">307</div><div class="l">Papeletas válidas</div></div>
+    <div class="stat"><div class="n">104</div><div class="l">Participantes</div></div>
+    <div class="stat"><div class="n">182<span style="font-size:18px">/182</span></div><div class="l">Seguidores verificados</div></div>
+  </div>
+  <div class="scrolldown">Scroll</div>
+</div>
+
+<section id="sorteo">
+  <div class="machine-wrap">
+    <div class="machine">
+      <div class="mach-inner">
+        <div class="mach-label">La suerte no se negocia</div>
+        <div class="display"><div class="name censored" id="dispName">████████</div></div>
+        <div class="papeleta-tag" id="dispTag">307 papeletas en juego</div>
+        <button id="btnDraw" onclick="runDraw()" disabled>Bloqueado hasta las 17:35</button>
+        <div class="mach-note">Se desbloquea a las 17:35 · solo el código privado puede iniciar el sorteo · azar criptográfico generado al pulsar · resultado global de un solo uso</div>
+        <div class="results">
+          <div class="rcard winner" id="card0"><div class="tag">🏆 Ganador@</div><div class="u">—</div><div class="p">&nbsp;</div><div class="m">&nbsp;</div></div>
+          <div class="rcard" id="card1"><div class="tag">Suplente 1</div><div class="u">—</div><div class="p">&nbsp;</div><div class="m">&nbsp;</div></div>
+          <div class="rcard" id="card2"><div class="tag">Suplente 2</div><div class="u">—</div><div class="p">&nbsp;</div><div class="m">&nbsp;</div></div>
+        </div>
+        <div class="verify" id="verifyBox"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="datos">
+  <div class="sec-k">Transparencia total</div>
+  <div class="sec-t">Los datos, a la vista</div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab(event,'t-validas')">Papeletas válidas (307)</button>
+    <button class="tab" onclick="showTab(event,'t-descartes')">Descartes (44)</button>
+  </div>
+  <div class="tabpane active" id="t-validas">
+    <input class="search" id="q" placeholder="Busca tu @usuario…" oninput="filterTable()">
+    <div class="tablewrap"><table id="tblV"><thead><tr><th>Nº</th><th>Usuario</th><th>Menciona</th></tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="tabpane" id="t-descartes">
+    <div class="tablewrap"><table id="tblD"><thead><tr><th>Usuario</th><th>Motivo</th><th>Comentario</th></tr></thead><tbody></tbody></table></div>
+  </div>
+</section>
+
+<section id="metodo">
+  <div class="sec-k">Cómo se ha hecho</div>
+  <div class="sec-t">Metodología y datos</div>
+  <div class="prose">
+    <h3><span>01 /</span> De dónde salen los datos</h3>
+    Todos los datos provienen de información <b>pública</b> de Instagram: los <b>351 comentarios</b> del post oficial del sorteo (instagram.com/p/DbtgM1fjUYG) y la lista de <b>seguidores</b> de @47private.brand (182/182, extraída completa el 17/08/2026). No se ha usado ninguna fuente privada ni de terceros.
+    <h3><span>02 /</span> Reglas aplicadas a cada comentario</h3>
+    <ol>
+      <li>Debe contener <b>2 o más menciones únicas</b> (@usuario). No cuentan las automenciones ni mencionar a la propia marca.</li>
+      <li>El autor debe <b>seguir a @47private.brand</b> — cotejado uno a uno contra la lista completa de seguidores. Resultado: el 100% de los participantes válidos siguen la cuenta.</li>
+      <li>Los comentarios de la propia marca quedan excluidos.</li>
+      <li>Comentarios duplicados exactos (mismo autor y mismas menciones) contarían una sola vez. Se encontraron <b>0</b> duplicados.</li>
+    </ol>
+    <div class="hl"><b>Cada comentario válido = 1 papeleta.</b> Por eso quien más comentó (cumpliendo las reglas) más papeletas tiene: exactamente lo anunciado en el post — "a mayor proporción, mayor probabilidad".</div>
+    <h3><span>03 /</span> El requisito del "like"</h3>
+    Instagram <b>no permite consultar la lista completa de "Me gusta"</b> de una publicación (a nadie: ni a marcas ni a herramientas de sorteos). De 162 likes declarados, la plataforma solo expone una fracción. Por eso —como en cualquier sorteo profesional— el like se <b>verifica manualmente al ganador y suplentes</b> en el momento del resultado. Si no cumple, pasa el turno al siguiente.
+    <h3><span>04 /</span> Cómo se elige al ganador@</h3>
+    El botón permanece <b>bloqueado hasta el 17/08/2026 a las 17:35:00 (hora peninsular)</b>. A partir de esa hora, el sorteo solo puede iniciarse introduciendo un <b>código privado que no está incluido en GitHub ni en el HTML público</b>. Al confirmar, una función segura de Vercel genera en ese instante una <b>semilla criptográfica aleatoria de 256 bits</b> y deriva de ella el ganador y los 2 suplentes. El resultado se intenta guardar en almacenamiento persistente con una operación <b>write-once (SET NX)</b>: si ya existe un resultado oficial, el servidor devuelve siempre el primero y se niega a crear otro. Así, recargar la página, usar otro dispositivo o repetir la petición no cambia el resultado oficial. La semilla, fecha/hora y SHA-256 de la lista quedan publicados después del sorteo para poder reproducir la selección.
+    <h3><span>05 /</span> Tratamiento de datos (RGPD)</h3>
+    Se tratan únicamente <b>nombres de usuario públicos</b> y el texto público de sus comentarios, con la exclusiva finalidad de gestionar este sorteo (selección y contacto del ganador). No se ceden a terceros ni se usan con fines publicitarios, y se eliminarán una vez entregado el premio. Responsable: 47PRIVATE. Para cualquier consulta o supresión: <b>contact47private@gmail.com</b>.
+  </div>
+</section>
+
+<section id="bases">
+  <div class="sec-k">Lo legal, claro</div>
+  <div class="sec-t">Bases del sorteo</div>
+  <div class="prose">
+    <h3><span>1.</span> Premio</h3>Una (1) camiseta a elegir del Drop 001 (ALLIN, TrueLove o FKSTAR), en la talla disponible que elija el ganador/a. Incluye envío gratis y un código del 50% de descuento (ver punto 8). Intransferible y no canjeable por dinero.
+    <h3><span>2.</span> Participación (gratis, sin compra)</h3>Seguir a @47private.brand + like al post + mencionar a 2 amigos reales en un comentario. A mayor proporción de comentarios válidos, mayor probabilidad.
+    <h3><span>3.</span> Requisitos</h3>Cuenta de Instagram real y pública, ser mayor de 18 años (o menor con permiso de tutor legal) y residir en España (por envío). Se excluyen cuentas falsas, duplicadas o que incumplan las bases.
+    <h3><span>4.</span> Plazo</h3>Del 06/08/2026 al 16/08/2026 a las 23:59 (hora peninsular).
+    <h3><span>5.</span> Ganador — con transparencia total</h3>El ganador se elige el 17/08/2026 de forma aleatoria y verificable mediante el sistema descrito en la metodología de esta página, mostrado en directo. La lista completa de papeletas es pública en esta misma web.
+    <h3><span>6.</span> Contacto y entrega</h3>Se avisa por DM únicamente desde @47private.brand. El ganador dispone de 48 h para responder; en su defecto, pasa al suplente. Envío gratis dentro de España en un plazo aproximado de 3 días laborables tras confirmar los datos.
+    <h3><span>7.</span> Meta y datos</h3>Promoción no patrocinada, avalada ni administrada por Instagram/Meta, ni asociada a ellos. Participar implica aceptar estas bases. Los datos se tratan según el apartado de metodología (RGPD).
+    <h3><span>8.</span> Descuento</h3>El ganador recibe además un código del 50% en 1 único pedido, no acumulable con otras promociones, válido hasta el 20/08/2026.
+    <h3><span>9.</span> Cancelación</h3>47PRIVATE podrá cancelar o modificar el sorteo por causas justificadas, comunicándolo por sus canales oficiales.
+    <div class="hl">Cuenta oficial única: <b>@47private.brand</b>. Cualquier otra cuenta, sorteo o "ganador" fuera de esta página y de esa cuenta es falso.</div>
+  </div>
+</section>
+
+<footer>Always from the heart <span class="heart">█</span> 47PRIVATE · Drop 001 · Revelation 2026</footer>
+<script>
+const DATA=[[1,"hectoralcainee__","@nandinho.priv @enmaarubio_"],[2,"maartiberrioo","@_aleixpares_ @deereekk17"],[3,"maartiberrioo","@gerard_santiin @47.funes"],[4,"eriiccardenas_","@paauufr @guillem_06"],[5,"desde_ca_ferreiro","@lacocinadesuli @susanacampanilla5"],[6,"gerard_santiin","@iker.espiinaar_ @daviid_melendezz"],[7,"gerard_santiin","@aaronnsantiagoo_ @maartiberrioo"],[8,"airtc821","@serendipitynewtime @m3andc4m"],[9,"airtc821","@joven_salvaje @jcga1977"],[10,"alexteccc","@samgar258 @pascual9720"],[11,"bustamestre","@pepitalagel1941 @luciaramon569"],[12,"alexteccc","@fuente79968 @gusytec"],[13,"bustamestre","@anasa3333 @telmoramongarcia"],[14,"serendipitynewtime","@airtc821 @joven_salvaje"],[15,"serenetashow","@josemijamon @annavaca1976"],[16,"bustamestre","@joel5ln @luciaramon45"],[17,"monicajimenezgomez","@rosamariajimenezgomez44 @roociioog_"],[18,"bustamestre","@estefi57 @soniapaz89"],[19,"bustamestre","@avalonproyect3.0 @bustapple"],[20,"bustamestre","@la_mamma_4 @estefania9063"],[21,"monicajimenezgomez","@charojimenezramos @angela_salas3"],[22,"monicajimenezgomez","@judith.jlr @josefavillarrealsanche"],[23,"bustamestre","@permanentjose @crisnasa"],[24,"marigracia76","@damigb2010 @nereaneivin"],[25,"_hhugito","@criscorreas2010 @turu_power"],[26,"monicajimenezgomez","@joagardel @rocigardel2011"],[27,"monicajimenezgomez","@ivanpj_011 @_soniiaa_3"],[28,"moralesmorolos","@granaina90 @capitanquintillo"],[29,"bustamestre","@ele85555 @vicentlacruz"],[30,"a.merino_33","@sermm15 @joaq_vid"],[31,"marilolombardia","@antoniopavonolmo @nt197.0"],[32,"manuel.genaro.90","@triniabrilalvarez @curvy51xxl"],[33,"mozartia_","@kaeltika @mcarmilla"],[34,"serendipitynewtime","@sonit_ina @sergioperez3475"],[35,"gasol1976","@escultaalvarez @franciscoesculta"],[36,"bustamestre","@hadamaite @lucy__18l"],[37,"bustamestre","@lorenzoscanner @brujiyolis"],[38,"franciscojesussanchezjurado","@anamariajuradojurado @francisco.sanchezmartin.146"],[39,"monicajimenezgomez","@diegotalavancayo @mari_angeles_ml"],[40,"manuel.genaro.90","@truko_78 @j.m.gonzalez5"],[41,"_lu_na_ti_co_","@raquelcarrion72 @albius1916"],[42,"mozartia_","@granelidniularare @hellade2024"],[43,"gerard_santiin","@vinijr @le_matecito"],[44,"moralesmorolos","@mariianmanzanx @angustiky"],[45,"franciscodieguezp","@auroraaespinolaa_ @_seergiiio_td"],[46,"jonarene333","@abbiiee @nicolelizzeth_"],[47,"serenetashow","@aralemany @evacarrascoalemany"],[48,"tonigarnicamartinez","@lolisanchez155 @akelitalba"],[49,"airtc821","@sonit_ina @jose.fadomingo"],[50,"marilolombardia","@crispi08ab @yolibelleza"],[51,"pacopp_1","@ramiro_peluqueros @5953.gustavo"],[52,"bustamestre","@blw.mamaenpracticas @la_mini_peich_molona"],[53,"andrea8435990","@cashconverters_aviadorzorita @cashconverters_corazondemaria"],[54,"triatloibigigaz","@eliassaile1980 @jauregi85bala"],[55,"evamar7777","@antonio @maria"],[56,"maria_antonia_cerezo","@joseagoiz79 @finahg1978"],[57,"marilolombardia","@emidelucas @nahijo"],[58,"serenetashow","@herminiota @barretamania"],[59,"17.maarioo","@heerrerooo.priivv @seergiogarciiaa_"],[60,"balestisugar","@itxaropena111 @kadehobeti"],[61,"gerard_santiin","@psoe @ahorapodemos"],[62,"serenetashow","@lagambarojacatarroja @catixepi"],[63,"balestisugar","@mitoskatua69 @antongalda"],[64,"iker.espiinaar_","@sergi.navaarroo_ @aleexxloppez_"],[65,"17.maarioo","@_indiiirectasss__ @maarioherreroo_"],[66,"balestisugar","@arantxa_bil @rotiac2"],[67,"marilolombardia","@tnintai @cokito39"],[68,"galimore.19","@art_k110 @aries_cocinillas"],[69,"galimore.19","@axu2729 @letgalmor"],[70,"inmigallego","@alex020877 @duduboy75"],[71,"inmigallego","@kattycandy_girl @blogger_la_princesseparisienne"],[72,"inmigallego","@silviacid_90 @tatiana_30b"],[73,"inmigallego","@edurp16 @vns8_6"],[74,"inmigallego","@richy_1782 @ealbae"],[75,"inmigallego","@moremd38 @diego_aca95"],[76,"moremd38","@isam.ar7400 @angelito__1977"],[77,"moremd38","@ang7si @marii_angeles7"],[78,"moremd38","@missmuestritas @mariangeles__7"],[79,"moremd38","@moisesriquelme94 @rugbyman_25"],[80,"moremd38","@mercedesmantas @veronica1984asier"],[81,"moremd38","@catrinadelsur @cristinagallinas"],[82,"moremd38","@evasalas13 @inmigallego"],[83,"moremd38","@albertrvas @soniacar77"],[84,"11mafra","@648mlo @casero.pana"],[85,"11mafra","@tavino2024 @manuelfranp"],[86,"ateyoland","@loren.trujillo07 @paulafajardo97"],[87,"yoly.gut","@mariaroa345 @ana_guzman1443"],[88,"princesyol","@lauraguarnizo_19 @majo_guzman1107"],[89,"sanjuyol","@andrea_09guzman @sofia_gran12"],[90,"sanjuyol","@mariajosecardoso64 @tatianaesquivel32"],[91,"sanjuyol","@danielapinto_16 @lau.o07"],[92,"desde_ca_ferreiro","@losniseiros2.0 @louissess18"],[93,"desde_ca_ferreiro","@eva_enlacocina @cocinadeeva"],[94,"toletum69","@sofia__rm07 @isa_diaz8_"],[95,"toletum69","@marig1828 @danielabarcenasc"],[96,"kruppyer","@anahrmendez @daniela_dan24"],[97,"deereekk17","@anikilo_oficial @myyes__"],[98,"deereekk17","@maartiberrioo @franco_oficiial"],[99,"deereekk17","@gerard_santiin @toma_trakatra"],[100,"princesyol","@rmo16pau @luis_arias55"],[101,"ateyoland","@isaacromero1 @osorio_carolina1"],[102,"ateyoland","@serrato6077 @olga_galeano01"],[103,"toletum69","@laurabarragan_18 @manucardonarias"],[104,"yoly.gut","@nataaa.sz @mabeltranr"],[105,"yoly.gut","@claudiaoli23 @daniriveros_villagran"],[106,"moy_saa","@joseferari @jose.antoniomesa"],[107,"kruppyer","@clauhdzgalindo @tamara_con_t"],[108,"daviidg_07","@javigallego8 @david_gm07"],[109,"viajerooo95_","@ivaanra @margu_80"],[110,"kruppyer","@mabelfloress @aleefuentes28"],[111,"sanjuyol","@s.herreram @rvillarreal_06"],[112,"sanjuyol","@angelaherrera84_ @martaaflores95"],[113,"dinosaur.604746","@estrellar @unpocodefelicidad8546"],[114,"dinosaur.604746","@nono4 @estrellaf"],[115,"dinosaur.604746","@pedrito_delpub @estrella_moreno"],[116,"dinosaur.604746","@floresyanira7 @angeljesuscarmonara"],[117,"dinosaur.604746","@nono_ @maria_roldan"],[118,"dinosaur.604746","@djcrespo_ @abraham_bastos"],[119,"yoly.gut","@marina25_mg @isa_mendoza_"],[120,"kruppyer","@danielaamort_ @esme_posadas_"],[121,"david_gm07","@javigallego8 @carlota_suarez"],[122,"david_gm07","@beatriiz_raya @btrz_12"],[123,"david_gm07","@_amanda_cc @_esmeraldacc"],[124,"jsantin_11","@gerard_santiin @47.funes"],[125,"otgeermolinaa__","@daniisanchoo_ @11.joaanm"],[126,"yoly.gut","@mariaf_patino @andreahernandez027"],[127,"kruppyer","@carolinap2917 @vanne160426"],[128,"kruppyer","@lauravss1 @_paola_perez06"],[129,"maikasam_","@leybe_ @josemiguelfernandezariza"],[130,"princesyol","@dianalozanomurillo @veroduqueb"],[131,"sanjuyol","@sofiav1__ @garciariveramonika"],[132,"ateyoland","@isa_velez310 @andreaaguirre578"],[133,"toletum69","@natalia_a.15 @naticardona96"],[134,"ivaanra","@pipomansana @viajerooo95_"],[135,"ivaanra","@anam.amo70 @laa_galindoo"],[136,"ivaanra","@carmen.colera @_arletruiz_"],[137,"ivaanra","@pilaralvarezamador @juanromero3955"],[138,"ivaanra","@anacolera39551 @saara.galindoo"],[139,"marilo6975","@vickymc93 @victoriamc_93"],[140,"marilo6975","@grabadoslaservictoria @joseluisdiazgarcia1"],[141,"marilo6975","@de_todo_lo_mej0r @dulcemadreselva"],[142,"marilo6975","@sucuna11 @samucuestaa_"],[143,"marilo6975","@28franmo @piluca____"],[144,"marilo6975","@emmacuestaa_ @reyespaui"],[145,"yoly.gut","@sandra.m.marin.73 @adrianasepulveda176"],[146,"kruppyer","@mariamtzzm @isa_salazar808"],[147,"kruppyer","@luz_novoaa @luna_moya15"],[148,"princesyol","@natyhoyos21 @diegogranadaa"],[149,"sanjuyol","@alvarez.9602 @lopezramos.luz"],[150,"mariagilro","@natialala_kung @emgoito"],[151,"adeosjo","@jorgembonet @jorgem_xtv"],[152,"bosswine84","@luca_rmen @nancie.poo"],[153,"bosswine84","@nayra_aryanita @fran_dhul"],[154,"bosswine84","@acurbra @semarcru"],[155,"bosswine84","@carpuca91 @bossmlg84"],[156,"bosswine84","@el_bastion @indezon_s"],[157,"bosswine84","@jagui_it @ese_eme_ce"],[158,"bosswine84","@chu_chubian @lascosasdesebayo"],[159,"bosswine84","@ayabisss @juanito_expirience"],[160,"bosswine84","@adri_cruz_b @anabrakdabra"],[161,"bosswine84","@la_teretubbie @wildtianmlg"],[162,"bosswine84","@ayocurbe @sebanizer"],[163,"joseluismadrid2024","@davidramirez7896 @angel.lak"],[164,"sandracortgon","@nelma873 @yolanda.gonzalezgonzalez.94"],[165,"sandracortgon","@annymontegar884 @sthrsami"],[166,"sandracortgon","@marinacvi @monmkz"],[167,"sandracortgon","@salinasjimenezeva @ciscujavier"],[168,"sandracortgon","@evapuravida @evmaja11.es"],[169,"sandracortgon","@belengm2001 @belenbeclay"],[170,"sandracortgon","@ronid003 @vanerlu75"],[171,"sandracortgon","@athenza_queen @finacampostrinidad"],[172,"sandracortgon","@valdiviapurilorca @miriam9485"],[173,"miguelverdejo78","@barti_lopez1981 @piranasreggae"],[174,"serjota2023","@retasergio21 @antoniosurfcastin"],[175,"serjota2023","@ikerprivvvv55 @sergio_privv123"],[176,"serjota2023","@deliasanchezn @leonelbellor"],[177,"serjota2023","@albertogomez012 @ikerirlprivv"],[178,"serjota2023","@juancalata1 @carlags88"],[179,"serjota2023","@maikaa73 @maikaa49"],[180,"serjota2023","@edu.j.s3 @garitapc"],[181,"serjota2023","@vinologicacadiz @ikeriker030516"],[182,"serjota2023","@slopezcuevas40 @frisa772025"],[183,"retasergio21","@martinadm15 @ikeriker030516"],[184,"retasergio21","@ika__87 @sergiodelgadoherrera"],[185,"retasergio21","@_iker.retamal21 @calataking"],[186,"retasergio21","@queliii_05 @mariaelenagonzalezolmo"],[187,"retasergio21","@wonderful17617 @iker22862"],[188,"retasergio21","@mascotaskukis @meryfp05"],[189,"retasergio21","@raki_stu @song.birdly"],[190,"retasergio21","@icoolgirl_7 @iker123313"],[191,"amontosa79","@juanfm32 @carrasketa_mami"],[192,"_hhugito","@bertaaa.fdez @22bertaa @333bertitaaa"],[193,"sergiosound","@arnauug010 @raquelcamo"],[194,"kenzolinaken","@marcosxixon @marcosxixonxixon"],[195,"ateyoland","@natigiraldo24 @suarezroxanaa"],[196,"coloresperanza0203","@vero_90 @veronicaripollvaliente"],[197,"coloresperanza0203","@analamurciana @gil.silvia"],[198,"coloresperanza0203","@digisafo90 @ovoy80"],[199,"coloresperanza0203","@acaroma1619 @crocanteta78"],[200,"alexandra__orgullosisima","@ramonzamoraayala @blancoraquelpiso"],[201,"alexandra__orgullosisima","@lovinnavalcarnero @silvia_slillo"],[202,"alexandra__orgullosisima","@bsasnatu @rosipiso"],[203,"alexandra__orgullosisima","@nika.mozart_yacoscolaroja @albaromeroparraga"],[204,"alexandra__orgullosisima","@alexromero199 @testayoo"],[205,"alexandra__orgullosisima","@raulityo @jaackwolfgang"],[206,"mari.vpo203","@nadia_spozo @yaniss5_18_54"],[207,"mari.vpo203","@lidia19_82 @soleanton_"],[208,"mari.vpo203","@dulcebaby30 @laritta8"],[209,"mari.vpo203","@mtpalaciosm @marichutim"],[210,"besiktas_pla","@lagarto_de_malaga @pumuki_80"],[211,"ateyoland","@sanjuyol @cristinajimenez2312"],[212,"ateyoland","@chonetti1972 @holyy1474"],[213,"ateyoland","@princesyol @sany.gutierrez"],[214,"ateyoland","@toletum69 @luligarcia3"],[215,"ateyoland","@kruppyer @yoly.gut"],[216,"mi_vida_con_tobi","@aguja_a_mano @bloqueos2025"],[217,"eriiccardenas_","@adi_preda_2004 @_.saaanchez._"],[218,"_hhugito","@_martin.222._ @endernight.66"],[219,"arics._.06","@paauufr @47.funes"],[220,"_hhugito","@martaallovett @laprivatedemartuqui @_martin.qn66_"],[221,"lunagatunas","@javiercasaled @nayy.cl_8"],[222,"monicabofarull","@marcmarin_b @abril_012_mb"],[223,"eriiccardenas_","@_kaxs.28 @sofkingfine"],[224,"paauufr","@eriiccardenas_ @arics._.06"],[225,"paauufr","@aarnnauu_03 @_.saaanchez._"],[226,"marcmarin_b","@monicabofarull @orimarin"],[227,"davidhercemunoz","@nandotorresactor @ssalas544__"],[228,"davidhercemunoz","@claralopezdavalillo @mariajesus.marinbento"],[229,"davidhercemunoz","@jomuga1983 @borjita.4"],[230,"davidhercemunoz","@paco.magda @marikemon"],[231,"davidhercemunoz","@soy64465 @eduep7"],[232,"davidhercemunoz","@losmarquesesdelaguerra @anaisssssss.2025"],[233,"davidhercemunoz","@inmasierrahidaldo @montse70sierra"],[234,"davidhercemunoz","@cristinavillanuevaarmas @marisolvillanueva_"],[235,"davidhercemunoz","@yolandamartinez7530 @khissa.r.g"],[236,"davidhercemunoz","@palermoarratia @yolanda75303"],[237,"davidhercemunoz","@teresa_tudanca9 @mariatudancapalermo"],[238,"davidhercemunoz","@vega.munozelias @herceguillermo"],[239,"joelrodriigueezz","@juanm.esap @dominiquevanmechgelen"],[240,"nxylife","@lucia_hernangomez @_napi_"],[241,"ovetus","@rocisant14 @ferrolovi"],[242,"ovetus","@amosanto @pilaroales"],[243,"ovetus","@mamemdec @increpone"],[244,"ovetus","@zaruki07 @roalespapa"],[245,"ovetus","@ana78vig @roalesmama"],[246,"viajaydesayuna","@lisi_toledo8943 @josejuan"],[247,"viajaydesayuna","@javelrayo @julianamino"],[248,"pardocristinarodriguez","@mariapardoal @a_lydiuska"],[249,"pardocristinarodriguez","@noeperez83 @celiaa_iglesias"],[250,"pardocristinarodriguez","@belencastrorey @gemavilarino_"],[251,"pardocristinarodriguez","@david.v.s.007 @anasantosmacias"],[252,"pardocristinarodriguez","@pedroventureira @o0iduna0o"],[253,"silalvi","@lorelorem @gabianana"],[254,"joselitoo10","@lunix115 @violeetaa___"],[255,"4leix_a","@guillem_trujillo @aresspb_"],[256,"mi_peludo_max","@fran_garciajimenez @leticiamonedero"],[257,"polberrioo","@elisabethpratt1978 @jabepra"],[258,"polberrioo","@bymartiberrio @maartiberrioo"],[259,"sugoest","@coqui_qui @geno_95"],[260,"herreroclaver","@jonathanber90 @robertocarlosdiogocarvalho"],[261,"miguel_verdejo","@manolinruizrosa @danodino1976"],[262,"bymartiberrio","@g.berrio @verokika_mo"],[263,"bymartiberrio","@joanabep @maite_berrio"],[264,"bymartiberrio","@polberrioo @maartiberrioo"],[265,"bymartiberrio","@elisabethpratt1978 @jabepra"],[266,"bymartiberrio","@leomessi @cristiano"],[267,"lurama3112","@joaquinriesgo @javyarki"],[268,"erikkmayoral._","@neerayy_ @carlespuigdemont"],[269,"erikkmayoral._","@aarnnauu_03 @mazorka513"],[270,"07arqui","@47.funes @09joelll"],[271,"deelafuenteee__","@paueett22 @mmarc.coro"],[272,"mmarc.coro","@izaanroses @neerayy_"],[273,"mmarc.coro","@deelafuenteee__ @_.uunnai07"],[274,"ladypiscis02","@mcamartos @vlrocio9"],[275,"ladypiscis02","@carolina.mya @ojoobservo"],[276,"ladypiscis02","@maiiite88 @yaniss5_18_54"],[277,"nayy.cl_8","@taniamunozblasco @fundazuri.headbanger"],[278,"nayy.cl_8","@carlasanchez9964 @karma_is_mine._"],[279,"nayy.cl_8","@lia_2011___ @ljm____.2"],[280,"nayy.cl_8","@lydia.muniesa @l.y.d.i.a.8"],[281,"nayy.cl_8","@marckpro_15 @infeccion_de_calvos"],[282,"nayy.cl_8","@boli_vic._ @teamamazing.eu"],[283,"nayy.cl_8","@lunagatunas @javiercasaled"],[284,"baaldeehh","@annaafal_ @auraaahmed"],[285,"baaldeehh","@maartiberrioo @annaafal_"],[286,"baaldeehh","@47.funes @gerard_santiin"],[287,"aaronnsantiagoo_","@yaanezz39 @_.gaarcia"],[288,"_bernat_pares","@44.luque @gopa2_"],[289,"jooansancheez","@44.luque @gopa2_"],[290,"jooansancheez","@_bernat_pares @jaairomg"],[291,"_bernat_pares","@jooansancheez @jaairomg"],[292,"8.bieel","@_ferranlozano @enol_dmngz_10"],[293,"07arqui","@cristiannerea2030 @alex07br"],[294,"07arqui","@fanimp78 @armi6353"],[295,"07arqui","@naiararm99 @nereea.rm_"],[296,"07arqui","@ainararm_ @_ariias98"],[297,"07arqui","@carlafh_31 @gerard_santiin"],[298,"07arqui","@_miquel.07 @julia07_31"],[299,"07arqui","@danaeelopeera @zzarcoo_"],[300,"07arqui","@jalenamadalena @luucyy_.07"],[301,"elben16sg","@samu_z.l @aloha.pantoja"],[302,"alextejero._","@_robledoo @nonander_21"],[303,"deereekk17","@_aleixpares_ @47.funes"],[304,"deereekk17","@gerard_santiin @maartiberrioo"],[305,"paueett22","@mariona_alca_3 @martii.cv_11"],[306,"paueett22","@mmarc.coro @marti.2111"],[307,"paueett22","@gerard_santiin @47.funes"]];
+const DESCARTES=[["_hhugito","menos de 2 menciones (1)","@juulia_ngg"],["laabuelabonita","menos de 2 menciones (1)","@manel0088"],["laabuelabonita","menos de 2 menciones (1)","@miguelcunyfernandez"],["laabuelabonita","menos de 2 menciones (1)","@luis.cuny"],["laabuelabonita","menos de 2 menciones (1)","@elmeriverso"],["laabuelabonita","menos de 2 menciones (1)","@elmeriverso"],["deereekk17","menos de 2 menciones (0)","(sin texto detectado - posible emoji/respuesta)"],["_hhugito","menos de 2 menciones (1)","@juulia_ngg"],["puufaa_","menos de 2 menciones (1)","@_josep.ventura_"],["puufaa_","menos de 2 menciones (1)","@annaafal_"],["_hhugito","menos de 2 menciones (1)","@aitancc._"],["_hhugito","menos de 2 menciones (1)","@10nooee"],["_hhugito","menos de 2 menciones (1)","@dxvyd_23"],["_hhugito","menos de 2 menciones (1)","@rbcatenass"],["_hhugito","menos de 2 menciones (1)","@dxspotter"],["_hhugito","menos de 2 menciones (1)","@aiitanaa.af"],["_hhugito","menos de 2 menciones (1)","@aaronchinn2.0"],["_hhugito","menos de 2 menciones (1)","@mario_vical"],["_hhugito","menos de 2 menciones (1)","@ggarciiaa_10"],["_hhugito","menos de 2 menciones (1)","@dani_vikal"],["_hhugito","menos de 2 menciones (1)","@_.rrrebeecaaa._"],["_hhugito","menos de 2 menciones (1)","@_sancho_qn_"],["catybauza","menos de 2 menciones (1)","@lluciiaballester"],["roogeer.__","menos de 2 menciones (1)","@mxxra_02"],["roogeer.__","menos de 2 menciones (1)","@heectoor.canonesss"],["roogeer.__","menos de 2 menciones (1)","@gerard_santiin"],["roogeer.__","menos de 2 menciones (1)","@47.funes"],["_hhugito","menos de 2 menciones (1)","@mario.fdezs"],["_hhugito","menos de 2 menciones (0)","@47private.brand (mencion a la marca, no cuenta)"],["amina_naimi.n","menos de 2 menciones (1)","@mariam_n.n._18"],["amina_naimi.n","menos de 2 menciones (1)","@a.n.n030_poetics"],["amina_naimi.n","menos de 2 menciones (1)","@yo_misma_18"],["herreroclaver","menos de 2 menciones (1)","@igormateo"],["herreroclaver","menos de 2 menciones (1)","@turru_jon"],["herreroclaver","menos de 2 menciones (1)","@albertolegarre"],["herreroclaver","menos de 2 menciones (1)","@gorkaproyect"],["herreroclaver","menos de 2 menciones (1)","@txakavicentegonzalez"],["herreroclaver","menos de 2 menciones (1)","@urko_torre"],["herreroclaver","menos de 2 menciones (1)","@inakimitxelenade"],["herreroclaver","menos de 2 menciones (1)","@ivantorresrosco"],["herreroclaver","menos de 2 menciones (1)","@jonpro31"],["herreroclaver","menos de 2 menciones (1)","@abad.jon"],["herreroclaver","menos de 2 menciones (1)","@messneroficial"],["paauufr","menos de 2 menciones (0)","\"muy bien bro asi me gusta\" (sin menciones)"]];
+
+
+/* ---------- tables ---------- */
+const tbV=document.querySelector('#tblV tbody');
+tbV.innerHTML=DATA.map(d=>`<tr><td class="n">${d[0]}</td><td class="user">@${d[1]}</td><td>${d[2]}</td></tr>`).join('');
+const tbD=document.querySelector('#tblD tbody');
+tbD.innerHTML=DESCARTES.map(d=>`<tr><td class="user">@${d[0]}</td><td>${d[1]}</td><td>${(d[2]||'').replace(/</g,'&lt;')}</td></tr>`).join('');
+function filterTable(){
+  const q=document.getElementById('q').value.trim().toLowerCase().replace(/^@/,'');
+  [...tbV.rows].forEach(r=>{r.style.display = r.textContent.toLowerCase().includes(q)?'':'none';});
+}
+function showTab(ev,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  ev.currentTarget.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+/* ---------- sorteo oficial: servidor + bloqueo global de un solo uso ---------- */
+const DRAW_NOT_BEFORE=Date.parse('2026-08-17T17:35:00+02:00');
+const DATA_SHA256='7cfe7c6dfb73c79e9fab1ded2e9cf33e53a48cd1290741baa7c47766f1a5cc2b';
+let officialResult=null;
+let statusLoaded=false;
+
+async function fetchOfficialStatus(){
+  try{
+    const r=await fetch('/api/result',{cache:'no-store'});
+    if(!r.ok) throw new Error('No se pudo consultar el estado');
+    const j=await r.json();
+    officialResult=j.drawn?j.result:null;
+  }catch(e){
+    // Si falla la consulta, mantenemos el botón bloqueado hasta que el estado pueda comprobarse.
+    officialResult=null;
+  }finally{
+    statusLoaded=true;
+    updateUnlockButton();
+  }
+}
+
+function openAdminModal(){
+  const overlay=document.getElementById('adminOverlay');
+  document.getElementById('adminError').textContent='';
+  document.getElementById('adminToken').value='';
+  overlay.classList.add('show');
+  overlay.setAttribute('aria-hidden','false');
+  setTimeout(()=>document.getElementById('adminToken').focus(),50);
+}
+function closeAdminModal(){
+  const overlay=document.getElementById('adminOverlay');
+  overlay.classList.remove('show');
+  overlay.setAttribute('aria-hidden','true');
+}
+async function confirmOfficialDraw(){
+  const token=document.getElementById('adminToken').value;
+  const err=document.getElementById('adminError');
+  const confirmBtn=document.getElementById('adminConfirm');
+  if(!token){ err.textContent='Introduce el código privado.'; return; }
+  err.textContent='';
+  confirmBtn.disabled=true;
+  confirmBtn.textContent='Autorizando…';
+  try{
+    closeAdminModal();
+    await executeOfficialDraw(token);
+  }finally{
+    confirmBtn.disabled=false;
+    confirmBtn.textContent='Confirmar sorteo';
+    document.getElementById('adminToken').value='';
+  }
+}
+
+/* ---------- slot animation ---------- */
+const disp=document.getElementById('dispName'), tag=document.getElementById('dispTag');
+function rollTo(pool, finalEntry, duration){
+  return new Promise(res=>{
+    const start=performance.now();
+    disp.classList.remove('censored','win'); disp.classList.add('rolling');
+    let last=0;
+    function frame(t){
+      const p=Math.min(1,(t-start)/duration);
+      const interval=30+520*Math.pow(p,3); // speeds up the slowdown
+      if(t-last>interval){
+        const r=pool[Math.floor(Math.random()*pool.length)];
+        disp.textContent='@'+r[1];
+        tag.innerHTML='papeleta <b>#'+r[0]+'</b>';
+        last=t;
+      }
+      if(p<1){ requestAnimationFrame(frame); }
+      else{
+        disp.textContent='@'+finalEntry[1];
+        disp.classList.remove('rolling'); disp.classList.add('win');
+        tag.innerHTML='PAPELETA <b>#'+finalEntry[0]+'</b> de '+DATA.length;
+        res();
+      }
+    }
+    requestAnimationFrame(frame);
+  });
+}
+
+/* ---------- confetti ---------- */
+const cv=document.getElementById('confetti'), cx=cv.getContext('2d');
+function confetti(){
+  cv.width=innerWidth; cv.height=innerHeight;
+  const parts=Array.from({length:160},()=>({
+    x:Math.random()*cv.width, y:-20-Math.random()*cv.height*0.4,
+    w:6+Math.random()*8, h:10+Math.random()*12,
+    vy:2.4+Math.random()*3.6, vx:-1.4+Math.random()*2.8,
+    rot:Math.random()*Math.PI, vr:-0.12+Math.random()*0.24,
+    c:['#d61a2a','#f4f4f0','#8a8a8a','#c1121f'][Math.floor(Math.random()*4)]
+  }));
+  const t0=performance.now();
+  (function draw(t){
+    cx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+      cx.save(); cx.translate(p.x,p.y); cx.rotate(p.rot); cx.fillStyle=p.c; cx.fillRect(-p.w/2,-p.h/2,p.w,p.h); cx.restore(); });
+    if(t-t0<3800){ requestAnimationFrame(draw);} else {cx.clearRect(0,0,cv.width,cv.height);}
+  })(t0);
+}
+
+/* ---------- draw sequence ---------- */
+const ROLES=['🏆 Ganador@','Suplente 1','Suplente 2'];
+let done=false;
+function fillCard(i,entry){
+  const c=document.getElementById('card'+i);
+  c.querySelector('.u').textContent='@'+entry[1];
+  c.querySelector('.p').innerHTML='Papeleta <b style="color:var(--red)">#'+entry[0]+'</b> de '+DATA.length;
+  c.querySelector('.m').textContent='Mencionó: '+entry[2];
+  c.classList.add('filled');
+}
+async function runDraw(){
+  if(done) return;
+  const btn=document.getElementById('btnDraw');
+  if(Date.now()<DRAW_NOT_BEFORE){ updateUnlockButton(); return; }
+
+  if(officialResult){
+    done=true;
+    btn.disabled=true;
+    await showOfficialResult(officialResult,false);
+    return;
+  }
+
+  if(!statusLoaded){
+    btn.disabled=true;
+    btn.textContent='Comprobando estado…';
+    await fetchOfficialStatus();
+    if(officialResult){
+      done=true;
+      await showOfficialResult(officialResult,false);
+      return;
+    }
+  }
+
+  openAdminModal();
+}
+
+async function executeOfficialDraw(token){
+  if(done) return;
+  done=true;
+  const btn=document.getElementById('btnDraw');
+  btn.disabled=true;
+  btn.textContent='Generando resultado oficial…';
+  const v=document.getElementById('verifyBox');
+  v.classList.remove('show');
+
+  try{
+    const r=await fetch('/api/draw',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-draw-token':token},
+      cache:'no-store'
+    });
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(j.error||('Error HTTP '+r.status));
+    if(!j.result) throw new Error('El servidor no devolvió un resultado válido.');
+    officialResult=j.result;
+    await showOfficialResult(officialResult,!j.alreadyExisted);
+  }catch(err){
+    done=false;
+    btn.disabled=false;
+    btn.textContent='SORTEAR GANADOR@';
+    v.innerHTML='<b>No se ha creado un resultado nuevo.</b><br>'+String(err.message||err);
+    v.classList.add('show');
+  }
+}
+
+async function showOfficialResult(payload,animate){
+  const btn=document.getElementById('btnDraw');
+  const picked=payload.picked;
+  if(!Array.isArray(picked)||picked.length!==3) throw new Error('Resultado almacenado inválido');
+  const durations=animate?[6000,3400,3400]:[0,0,0];
+
+  for(let i=0;i<3;i++){
+    const pool=DATA.filter(d=>!picked.slice(0,i).some(p=>p[1]===d[1]));
+    tagRole(i);
+    if(animate){
+      await rollTo(pool,picked[i],durations[i]);
+      if(i===0) confetti();
+      await new Promise(r=>setTimeout(r,900));
+    }else{
+      disp.textContent='@'+picked[i][1];
+      disp.classList.remove('censored','rolling'); disp.classList.add('win');
+      tag.innerHTML='PAPELETA <b>#'+picked[i][0]+'</b> de '+DATA.length;
+    }
+    fillCard(i,picked[i]);
+  }
+
+  btn.disabled=true;
+  btn.textContent='Sorteo realizado · resultado bloqueado';
+  document.querySelector('.mach-label').textContent='RESULTADO OFICIAL';
+  document.querySelector('.mach-label').style.color='var(--red)';
+  const when=new Date(payload.createdAt);
+  const stamp=when.toLocaleDateString('es-ES',{timeZone:'Europe/Madrid'})+' '+when.toLocaleTimeString('es-ES',{timeZone:'Europe/Madrid'});
+  const v=document.getElementById('verifyBox');
+  v.innerHTML='<b>Resultado oficial único · '+stamp+' (hora peninsular)</b><br>'+
+    picked.map((p,i)=>ROLES[i]+': <b>@'+p[1]+'</b> (papeleta #'+p[0]+' de '+DATA.length+')').join(' &nbsp;·&nbsp; ')+
+    '<br><br>SHA-256 lista oficial: <b style="word-break:break-all">'+payload.dataSha256+'</b>'+ 
+    '<br>Semilla criptográfica generada al pulsar: <b style="word-break:break-all">'+payload.seed+'</b>'+ 
+    '<br>ID de sorteo: <b>'+payload.drawId+'</b>'+ 
+    '<br>El almacenamiento persistente solo acepta el primer resultado oficial; cualquier intento posterior devuelve este mismo resultado.';
+  v.classList.add('show');
+}
+
+function updateUnlockButton(){
+  const btn=document.getElementById('btnDraw');
+  if(officialResult){
+    btn.disabled=false;
+    btn.textContent='Mostrar resultado oficial';
+    return;
+  }
+  const left=DRAW_NOT_BEFORE-Date.now();
+  if(left<=0){
+    btn.disabled=false;
+    btn.textContent=statusLoaded?'SORTEAR GANADOR@':'Comprobando estado…';
+    document.querySelector('.mach-label').textContent=statusLoaded?'LISTO · PULSA PARA SORTEAR':'COMPROBANDO ESTADO';
+    document.querySelector('.mach-label').style.color=statusLoaded?'var(--red)':'var(--dim)';
+    return;
+  }
+  btn.disabled=true;
+  const total=Math.ceil(left/1000);
+  const h=Math.floor(total/3600);
+  const m=Math.floor((total%3600)/60);
+  const sec=total%60;
+  btn.textContent='Bloqueado · '+(h?h+':':'')+String(m).padStart(h?2:1,'0')+':'+String(sec).padStart(2,'0');
+}
+
+function tagRole(i){
+  const el=document.querySelector('.mach-label');
+  el.textContent = i===0 ? 'Sorteando… GANADOR@' : 'Sorteando… '+ROLES[i].toUpperCase();
+  el.style.color = i===0 ? 'var(--red)' : 'var(--dim)';
+}
+
+addEventListener('resize',()=>{cv.width=innerWidth;cv.height=innerHeight;});
+window.addEventListener('DOMContentLoaded',()=>{
+  updateUnlockButton();
+  fetchOfficialStatus();
+  setInterval(updateUnlockButton,1000);
+});
+</script>
+</body>
+</html>
